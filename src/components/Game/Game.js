@@ -10,10 +10,29 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [newGuess, setNewGuess] = React.useState("");
+  const [guessList, setGuessList] = React.useState([]);
+
+  function handleAddItem(guess) {
+    const newItem = {
+      name: guess,
+      id: Math.random(),
+    };
+
+    const nextItems = [...guessList, newItem];
+    setGuessList(nextItems);
+  }
+
   return (
     <>
-      <GuessForm newGuess={newGuess} setNewGuess={setNewGuess} />
+      <div className="guess-results">
+        {guessList.map(({ id, name }) => (
+          <p key={id} className="guess">
+            {name}
+          </p>
+        ))}
+      </div>
+
+      <GuessForm handleAddItem={handleAddItem} />
     </>
   );
 }

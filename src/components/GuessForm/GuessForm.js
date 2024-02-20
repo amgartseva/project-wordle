@@ -1,13 +1,14 @@
 import React from "react";
 
-function GuessForm({ newGuess, setNewGuess }) {
+function GuessForm({ handleAddItem }) {
+  const [newGuess, setNewGuess] = React.useState("");
   return (
     <>
       <form
         className="guess-input-wrapper"
         onSubmit={(event) => {
           event.preventDefault();
-          console.log({ guess: newGuess.toUpperCase() });
+          handleAddItem(newGuess.toUpperCase());
           setNewGuess("");
         }}
       >
