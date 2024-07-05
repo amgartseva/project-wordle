@@ -1,13 +1,14 @@
 import React from "react";
 
-function GuessForm({ handleAddItem }) {
+function GuessForm({ handleNewGuess }) {
   const [newGuess, setNewGuess] = React.useState("");
+
   return (
     <form
       className="guess-input-wrapper"
       onSubmit={(event) => {
         event.preventDefault();
-        handleAddItem(newGuess);
+        handleNewGuess(newGuess);
         setNewGuess("");
       }}
     >
@@ -17,7 +18,7 @@ function GuessForm({ handleAddItem }) {
         type="text"
         required
         maxLength={5}
-        pattern=".{5}"
+        pattern="[a-zA-Z]{5}"
         title="Please input 5 characters"
         value={newGuess}
         onChange={(event) => {

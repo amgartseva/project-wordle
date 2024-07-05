@@ -1,5 +1,6 @@
 import React from "react";
 import GuessForm from "../GuessForm";
+import GuessResults from "../GuessResults";
 
 import { sample } from "../../utils";
 import { WORDS } from "../../data";
@@ -10,29 +11,19 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [guessList, setGuessList] = React.useState([]);
+  const [guessesList, setGuessesList] = React.useState([]);
 
-  function handleAddItem(guess) {
-    const newItem = {
-      name: guess,
-      id: Math.random(),
-    };
-
-    const nextItems = [...guessList, newItem];
-    setGuessList(nextItems);
+  function handleNewGuess(tentativeGuess) {
+    setGuessesList([...guessesList, tentativeGuess]);
   }
+
+  console.log(guessesList);
 
   return (
     <>
-      <div className="guess-results">
-        {guessList.map(({ id, name }) => (
-          <p key={id} className="guess">
-            {name}
-          </p>
-        ))}
-      </div>
+      <GuessResults guessesList={guessesList} answer={answer} />
 
-      <GuessForm handleAddItem={handleAddItem} />
+      <GuessForm handleNewGuess={handleNewGuess} />
     </>
   );
 }
